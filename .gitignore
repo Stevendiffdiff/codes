@@ -1,4 +1,5 @@
 /idx.pickle
 
-saved_models/
-best_models/
+# saved_models/
+# best_models/
+temp/
