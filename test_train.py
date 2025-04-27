@@ -17,13 +17,14 @@ train_labels_path = r'.\dataset\MNIST\train-labels-idx1-ubyte.gz'
 with gzip.open(train_images_path, 'rb') as f:
         magic, num, rows, cols = unpack('>4I', f.read(16))
         train_imgs=np.frombuffer(f.read(), dtype=np.uint8).reshape(num, 1*28*28) / 255.
+        # train_imgs=np.frombuffer(f.read(), dtype=np.uint8).reshape(num, 1, 28, 28) / 255. # if we use CNN, we need to reshape the images differently.
     
 with gzip.open(train_labels_path, 'rb') as f:
         magic, num = unpack('>2I', f.read(8))
         train_labs = np.frombuffer(f.read(), dtype=np.uint8)
 
 
-# choose 10000 samples from train set as validation set.
+# choose 1000 samples from train set as validation set.
 idx = np.random.permutation(np.arange(num))
 # save the index.
 with open('idx.pickle', 'wb') as f:
@@ -54,4 +55,5 @@ axes.reshape(-1)
 _.set_tight_layout(1)
 plot(runner, axes)
 
+plt.savefig('train.png')
 plt.show()

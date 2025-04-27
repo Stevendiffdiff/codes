@@ -25,6 +25,7 @@ class RunnerM():
         num_epochs = kwargs.get("num_epochs", 0)
         log_iters = kwargs.get("log_iters", 100)
         save_dir = kwargs.get("save_dir", "best_model")
+        model_name = kwargs.get("model_name", "best_model_-1.pickle")
 
         if not os.path.exists(save_dir):
             os.mkdir(save_dir)
@@ -72,7 +73,7 @@ class RunnerM():
                     print(f"[Dev] loss: {dev_loss}, score: {dev_score}")
 
             if dev_score > best_score:
-                save_path = os.path.join(save_dir, 'best_model.pickle')
+                save_path = os.path.join(save_dir, model_name)
                 self.save_model(save_path)
                 print(f"best accuracy performence has been updated: {best_score:.5f} --> {dev_score:.5f}")
                 best_score = dev_score
@@ -82,28 +83,19 @@ class RunnerM():
         X, y = data_set
         total_loss = 0
         total_score = 0
-        num_batches = (len(X) + batch_size - 1) // batch_size  # 计算批次数量
+        num_batches = (len(X) + batch_size - 1) // batch_size  
 
-        # 按照batch进行迭代
         for i in range(num_batches):
-            # 获取当前batch的X和y
             start_idx = i * batch_size
             end_idx = min((i + 1) * batch_size, len(X))
             X_batch = X[start_idx:end_idx]
             y_batch = y[start_idx:end_idx]
-            
-            # 模型的前向传播
             logits = self.model(X_batch)
-            
-            # 计算当前batch的损失和指标
             loss = self.loss_fn(logits, y_batch)
             score = self.metric(logits, y_batch)
-            
-            # 累加损失和指标
-            total_loss += loss.item() * len(X_batch)  # 按样本数量加权
+            total_loss += loss.item() * len(X_batch) 
             total_score += score.item() * len(X_batch)
-        
-        # 计算平均损失和平均指标
+            
         avg_loss = total_loss / len(X)
         avg_score = total_score / len(X)
         

@@ -88,7 +88,7 @@ class conv2D(Layer):
             X_padded = np.pad(X, ((0,0), (0,0), (self.padding,self.padding), (self.padding,self.padding)), mode='constant')
         else:
             X_padded = X
-        self.input_padded = X_padded  # 保存，用于backward
+        self.input_padded = X_padded 
 
         batch_size, in_channels, H, W = X_padded.shape
         out_channels, _, kH, kW = self.W.shape
@@ -134,7 +134,7 @@ class conv2D(Layer):
                         dX_padded[b, :, h_start:h_start+kH, w_start:w_start+kW] += grads[b, oc, i, j] * self.W[oc]
                         db[oc] += grads[b, oc, i, j]
 
-        # 去掉 padding 的部分
+        # 去掉 padding 
         if self.padding > 0:
             dX = dX_padded[:, :, self.padding:-self.padding, self.padding:-self.padding]
         else:
@@ -206,17 +206,15 @@ class MultiCrossEntropyLoss(Layer):
         
         batch_size = predicts.shape[0]
         correct_probs = self.softmax_output[np.arange(batch_size), labels]
-        loss = -np.mean(np.log(correct_probs + 1e-12))  # 防止log(0)
+        loss = -np.mean(np.log(correct_probs + 1e-12)) 
         return loss
     
     def backward(self):
-        # first compute the grads from the loss to the input
         batch_size = self.labels.shape[0]
         grads = self.softmax_output.copy()
         grads[np.arange(batch_size), self.labels] -= 1
         grads /= batch_size
         self.grads = grads
-        # Then send the grads to model for back propagation
         self.model.backward(self.grads)
 
     def cancel_soft_max(self):

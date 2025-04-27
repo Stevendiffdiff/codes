@@ -81,12 +81,11 @@ class Model_CNN(Layer):
     def __init__(self):
         super().__init__()
 
-        # Defining the layers:
-        self.conv1 = conv2D(in_channels=1, out_channels=4, kernel_size=3, stride=1, padding=1)  # Convolutional layer
-        self.relu1 = ReLU()  # Activation after convolutional layer
-        self.fc1 = Linear(in_dim=4 * 28 * 28, out_dim=600)  # First linear layer
-        self.relu2 = ReLU()  # Activation after the first linear layer
-        self.fc2 = Linear(in_dim=600, out_dim=10)  # Output to 10 classes (for classification)
+        self.conv1 = conv2D(in_channels=1, out_channels=4, kernel_size=3, stride=1, padding=1)
+        self.relu1 = ReLU() 
+        self.fc1 = Linear(in_dim=4 * 28 * 28, out_dim=600) 
+        self.relu2 = ReLU()  
+        self.fc2 = Linear(in_dim=600, out_dim=10) 
 
         self.layers = [self.conv1, self.relu1, self.fc1, self.relu2, self.fc2]
 
@@ -94,12 +93,12 @@ class Model_CNN(Layer):
         return self.forward(X)
 
     def forward(self, X):
-        out = self.conv1(X)  # First convolutional layer
-        out = self.relu1(out)  # Activation after convolutional layer
-        out = out.reshape(out.shape[0], -1)  # Flatten the output from convolutional layer for the first linear layer
-        out = self.fc1(out)  # First linear layer
-        out = self.relu2(out)  # Activation after the first linear layer
-        out = self.fc2(out)  # Second linear layer (output layer)
+        out = self.conv1(X)  
+        out = self.relu1(out) 
+        out = out.reshape(out.shape[0], -1) 
+        out = self.fc1(out) 
+        out = self.relu2(out)  
+        out = self.fc2(out)  
         return out
 
     def backward(self, loss_grad):
