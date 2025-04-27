@@ -1,4 +1,6 @@
-<font color=gray>### Start Up
+<font color=gray>
+
+### Start Up
 
 First look into the `dataset_explore.ipynb` and get familiar with the data.
 
@@ -26,6 +28,7 @@ If you want to train the model on your own dataset, just change the values of va
 Open test_model.py, specify the saved model's path and the test dataset's path, then run the script, the script will output the accuracy on the test dataset.
 
 <font color=lightgray>
+
 # My Submit
 
 ### Model Settings
@@ -56,3 +59,9 @@ $$
 2. Considering the experiments above, the best learning rate should be $0.005$, and the training process is 
 
 ![alt](figs/train_lr_0.005.png).
+
+### URLs
+
+* $\textbf{code:}$ <https://github.com/Stevendiffdiff/codes.git>
+
+* $\textbf{models:}$ <>
