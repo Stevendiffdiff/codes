@@ -25,7 +25,7 @@ If you want to train the model on your own dataset, just change the values of va
 
 Open test_model.py, specify the saved model's path and the test dataset's path, then run the script, the script will output the accuracy on the test dataset.
 
-<font color=white>
+<font color=lightgray>
 # My Submit
 
 ### Model Settings
@@ -47,9 +47,12 @@ $$
    \beta_1=0.9\\
    \beta_2=0.999
 \end{cases}
-$$. The results are visualized as:
+$$
+. The results are visualized as:
+
+![alt text](figs/accuracy_vs_lr.png)
 
 
-2. Considering the experiments above, the best learning rate should be $0.01$, and the training process is 
+2. Considering the experiments above, the best learning rate should be $0.005$, and the training process is 
 
-![alt](figs/train_lr_0.01.png).
+![alt](figs/train_lr_0.005.png).

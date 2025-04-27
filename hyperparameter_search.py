@@ -68,8 +68,9 @@ test_imgs = test_imgs / test_imgs.max()
 
 accuracies = []
 
-for lr, runner in results.items():
-    model.load_model(r'.\best_models\best_model.pickle')
+for lr in learning_rates:
+    model = nn.models.Model_MLP([28 * 28, 1024, 512, 10], 'ReLU', [1e-4, 1e-4, 1e-4])
+    model.load_model(f'./saved_models/model_{lr}.pickle')
     logits = model(test_imgs)
     accuracy = nn.metric.accuracy(logits, test_labs)
     accuracies.append(accuracy)
