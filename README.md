@@ -62,6 +62,8 @@ $$
 
 ### URLs
 
-* $\textbf{code:}$ <https://github.com/Stevendiffdiff/codes.git>
+* $\textbf{code:}$ <https://github.com/Stevendiffdiff/codes/tree/main> (fork: ```main```)
 
-* $\textbf{models:}$ <>
+* $\textbf{models:}$ <https://github.com/Stevendiffdiff/codes/tree/model-and-dataset> (fork: ```model-and-dataset```)
+
+* **note: because of the limited space in my cloud, I chose t save my models and dataset in another fork of the repository ```codes```.** 
